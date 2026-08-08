@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BioLoop - Solusi Cerdas Pangan & Energi</title>
+    <!-- Google Fonts: Inter & Plus Jakarta Sans -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="app-container">
+        
+        <!-- Sidebar Simulator (Untuk demonstrasi alur sistem) -->
+        <aside class="simulator-panel">
+            <div class="simulator-header">
+                <h3><i class="fa-solid fa-gears"></i> Panel Simulator BioLoop</h3>
+                <p>Gunakan panel ini untuk mensimulasikan alur kerja Kurir dan Reaktor Energi secara lokal.</p>
+            </div>
+            
+            <div class="simulator-section">
+                <h4><i class="fa-solid fa-truck-ramping"></i> 1. Tugas Kurir (Penjemputan)</h4>
+                <div id="empty-pickup" class="empty-state">
+                    <p>Belum ada permintaan penjemputan sampah dari warga.</p>
+                </div>
+                <div id="pickup-list" class="pickup-list">
+                    <!-- Item jemputan akan ditambahkan oleh JS -->
+                </div>
+            </div>
+
+            <div class="simulator-section">
+                <h4><i class="fa-solid fa-bolt"></i> 2. Status Reaktor Bioenergi</h4>
+                <div class="reactor-stats">
+                    <div class="stat-box">
+                        <span class="stat-label">Total Sampah Terolah</span>
+                        <span id="reactor-total-waste" class="stat-val">12.5 kg</span>
+                    </div>
+                    <div class="stat-box">
+                        <span class="stat-label">Gas Dihasilkan (Metana)</span>
+                        <span id="reactor-biogas" class="stat-val">5.6 m³</span>
+                    </div>
+                    <div class="stat-box">
+                        <span class="stat-label">Estimasi Listrik Konversi</span>
+                        <span id="reactor-electricity" class="stat-val">11.2 kWh</span>
+                    </div>
+                </div>
+                <div class="progress-bar-container">
+                    <div class="progress-bar-label">
+                        <span>Kapasitas Reaktor</span>
+                        <span id="reactor-capacity-text">25%</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div id="reactor-progress" class="progress-fill" style="width: 25%"></div>
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Mobile App Frame -->
+        <main class="mobile-frame">
+            <!-- Screen 1: Dashboard -->
+            <section id="screen-dashboard" class="app-screen active">
+                <header class="app-header">
+                    <div class="user-profile">
+                        <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&q=80&w=100&h=100" alt="Avatar" class="avatar">
+                        <div class="user-info">
+                            <span class="welcome-text">Selamat pagi,</span>
+                            <span class="user-name">Kiran Lestari</span>
+                        </div>
+                    </div>
+                    <div class="point-badge">
+                        <i class="fa-solid fa-leaf text-emerald"></i>
+                        <span id="user-points">1,250</span> <span class="point-lbl">Poin</span>
+                    </div>
+                </header>
+
+                <div class="scroll-content">
+                    <!-- Banner Info Dampak -->
+                    <div class="impact-banner card-gradient">
+                        <div class="impact-info">
+                            <h4>Kontribusi Hijau Anda</h4>
+                            <div class="impact-grid">
+                                <div class="impact-item">
+                                    <span class="impact-val" id="user-waste-saved">8.4 kg</span>
+                                    <span class="impact-lbl">Sampah Makanan</span>
+                                </div>
+                                <div class="impact-item">
+                                    <span class="impact-val" id="user-co2-reduced">2.1 kg</span>
+                                    <span class="impact-lbl">CO₂ Terreduksi</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="impact-icon-bg">
+                            <i class="fa-solid fa-earth-asia"></i>
+                        </div>
+                    </div>
+
+                    <!-- Menu Aksi Utama -->
+                    <div class="action-grid">
+                        <button class="action-card" onclick="switchScreen('screen-setor')">
+                            <div class="icon-circle bg-emerald">
+                                <i class="fa-solid fa-trash-arrow-up"></i>
+                            </div>
+                            <span>Setor Sampah</span>
+                        </button>
+                        <button class="action-card" onclick="switchScreen('screen-hadiah')">
+                            <div class="icon-circle bg-gold">
+                                <i class="fa-solid fa-gift"></i>
+                            </div>
+                            <span>Tukar Poin</span>
+                        </button>
+                    </div>
+
+                    <!-- Riwayat Setoran -->
+                    <div class="section-title">
+                        <h3>Riwayat Setoran</h3>
+                        <a href="#" class="view-all">Lihat Semua</a>
+                    </div>
+                    <div class="history-list" id="donation-history">
+                        <!-- Riwayat akan di-render oleh JS -->
+                    </div>
+                </div>
+            </section>
+
+            <!-- Screen 2: Setor Sampah -->
+            <section id="screen-setor" class="app-screen">
+                <header class="screen-header">
+                    <button class="back-btn" onclick="switchScreen('screen-dashboard')">
+                        <i class="fa-solid fa-chevron-left"></i>
+                    </button>
+                    <h2>Setor Sampah</h2>
+                    <div class="header-placeholder"></div>
+                </header>
+
+                <div class="scroll-content">
+                    <form id="form-setor" onsubmit="handleFormSetor(event)">
+                        <div class="form-group">
+                            <label>Jenis Sampah Organik</label>
+                            <div class="type-selector">
+                                <label class="type-option">
+                                    <input type="radio" name="waste-type" value="Sisa Makanan" checked>
+                                    <div class="option-card">
+                                        <i class="fa-solid fa-plate-wheat"></i>
+                                        <span>Sisa Makanan</span>
+                                    </div>
+                                </label>
+                                <label class="type-option">
+                                    <input type="radio" name="waste-type" value="Kulit Buah/Sayur">
+                                    <div class="option-card">
+                                        <i class="fa-solid fa-carrot"></i>
+                                        <span>Buah & Sayur</span>
+                                    </div>
+                                </label>
+                                <label class="type-option">
+                                    <input type="radio" name="waste-type" value="Ampas Kopi/Teh">
+                                    <div class="option-card">
+                                        <i class="fa-solid fa-mug-hot"></i>
+                                        <span>Ampas Kopi</span>
+                                    </div>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="waste-weight">Estimasi Berat (kg)</label>
+                            <div class="weight-input-container">
+                                <input type="number" id="waste-weight" name="weight" min="0.5" step="0.1" value="1.0" required>
+                                <span class="weight-unit">kg</span>
+                            </div>
+                            <span class="input-hint">Catatan: Timbangan akhir akan diverifikasi kembali oleh kurir di lokasi penjemputan.</span>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Foto Sampah</label>
+                            <div class="photo-uploader" onclick="simulatePhotoUpload()">
+                                <i class="fa-solid fa-camera"></i>
+                                <span id="photo-status">Ambil Foto Sampah</span>
+                                <input type="file" id="file-input" style="display: none;" accept="image/*">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Lokasi Penjemputan</label>
+                            <div class="location-box">
+                                <i class="fa-solid fa-location-dot text-emerald"></i>
+                                <span id="location-text">Jl. Kemang Raya No. 42, Jakarta Selatan</span>
+                            </div>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary btn-block">
+                            <i class="fa-solid fa-paper-plane"></i> Ajukan Penjemputan
+                        </button>
+                    </form>
+                </div>
+            </section>
+
+            <!-- Screen 3: Tukar Poin -->
+            <section id="screen-hadiah" class="app-screen">
+                <header class="screen-header">
+                    <button class="back-btn" onclick="switchScreen('screen-dashboard')">
+                        <i class="fa-solid fa-chevron-left"></i>
+                    </button>
+                    <h2>Tukar Poin</h2>
+                    <div class="header-placeholder"></div>
+                </header>
+
+                <div class="scroll-content">
+                    <div class="reward-points-card">
+                        <span>Poin Tersedia</span>
+                        <h2 id="reward-points-val">1,250</h2>
+                        <p class="sub-text">100 Poin = Rp 1.000,- potongan tagihan</p>
+                    </div>
+
+                    <div class="reward-categories">
+                        <span class="category-pill active">Semua</span>
+                        <span class="category-pill">Listrik</span>
+                        <span class="category-pill">Air (PDAM)</span>
+                    </div>
+
+                    <div class="reward-grid" id="reward-items-container">
+                        <!-- Voucher Cards will be dynamically loaded here by JS -->
+                    </div>
+                </div>
+            </section>
+
+            <!-- Bottom Navigation Bar -->
+            <nav class="app-nav">
+                <button class="nav-item active" onclick="switchScreen('screen-dashboard')">
+                    <i class="fa-solid fa-house"></i>
+                    <span>Dashboard</span>
+                </button>
+                <button class="nav-item" onclick="switchScreen('screen-setor')">
+                    <i class="fa-solid fa-circle-plus"></i>
+                    <span>Setor</span>
+                </button>
+                <button class="nav-item" onclick="switchScreen('screen-hadiah')">
+                    <i class="fa-solid fa-gift"></i>
+                    <span>Tukar</span>
+                </button>
+            </nav>
+        </main>
+    </div>
+
+    <!-- Modal Sukses Penukaran -->
+    <div id="reward-modal" class="modal-overlay">
+        <div class="modal-content">
+            <div class="modal-success-icon">
+                <i class="fa-solid fa-circle-check"></i>
+            </div>
+            <h3>Penukaran Berhasil!</h3>
+            <p id="modal-reward-desc">Token Listrik PLN Rp 10.000</p>
+            <div class="voucher-code-box">
+                <span class="code-label">Kode Voucher / Token Anda:</span>
+                <span id="voucher-code" class="code-value">---- ---- ---- ---- ----</span>
+            </div>
+            <button class="btn btn-secondary btn-block" onclick="closeRewardModal()">Salin & Selesai</button>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
