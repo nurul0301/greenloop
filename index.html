@@ -141,33 +141,45 @@
                     <form id="form-setor" onsubmit="handleFormSetor(event)">
                         <div class="form-group">
                             <label>Kategori Sampah</label>
-                            <div class="type-selector">
-                                <label class="type-option">
+                            <div class="type-selector-list">
+                                <label class="type-option-item">
                                     <input type="radio" name="waste-type" value="Organik" checked>
-                                    <div class="option-card">
-                                        <i class="fa-solid fa-leaf text-emerald"></i>
-                                        <span>Organik</span>
+                                    <div class="option-item-card">
+                                        <div class="option-item-header">
+                                            <i class="fa-solid fa-leaf text-emerald"></i>
+                                            <span class="option-item-title">Organik</span>
+                                        </div>
+                                        <p class="option-item-desc">Sisa makanan, kulit buah, sayuran, daun kering, dan ranting pohon.</p>
                                     </div>
                                 </label>
-                                <label class="type-option">
+                                <label class="type-option-item">
                                     <input type="radio" name="waste-type" value="Anorganik">
-                                    <div class="option-card">
-                                        <i class="fa-solid fa-recycle text-cyan"></i>
-                                        <span>Anorganik</span>
+                                    <div class="option-item-card">
+                                        <div class="option-item-header">
+                                            <i class="fa-solid fa-recycle text-cyan"></i>
+                                            <span class="option-item-title">Anorganik</span>
+                                        </div>
+                                        <p class="option-item-desc">Botol plastik, kantong plastik, kaleng logam, dan kaca.</p>
                                     </div>
                                 </label>
-                                <label class="type-option">
+                                <label class="type-option-item">
                                     <input type="radio" name="waste-type" value="B3">
-                                    <div class="option-card">
-                                        <i class="fa-solid fa-skull-crossbones text-red"></i>
-                                        <span>B3 (Bahaya)</span>
+                                    <div class="option-item-card">
+                                        <div class="option-item-header">
+                                            <i class="fa-solid fa-skull-crossbones text-red"></i>
+                                            <span class="option-item-title">B3 (Bahan Berbahaya)</span>
+                                        </div>
+                                        <p class="option-item-desc">Baterai bekas, lampu neon, wadah kosmetik/deterjen, & limbah elektronik.</p>
                                     </div>
                                 </label>
-                                <label class="type-option">
+                                <label class="type-option-item">
                                     <input type="radio" name="waste-type" value="Residu">
-                                    <div class="option-card">
-                                        <i class="fa-solid fa-trash-can text-gray"></i>
-                                        <span>Residu</span>
+                                    <div class="option-item-card">
+                                        <div class="option-item-header">
+                                            <i class="fa-solid fa-trash-can text-gray"></i>
+                                            <span class="option-item-title">Residu</span>
+                                        </div>
+                                        <p class="option-item-desc">Popok sekali pakai, pembalut wanita, dan tisu kotor.</p>
                                     </div>
                                 </label>
                             </div>
