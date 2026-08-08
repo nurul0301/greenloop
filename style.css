@@ -33,6 +33,10 @@
 
 body {
     background-color: var(--bg-dark-900);
+    background-image: 
+        radial-gradient(circle at 10% 20%, rgba(16, 185, 129, 0.08) 0%, transparent 40%),
+        radial-gradient(circle at 90% 80%, rgba(6, 182, 212, 0.05) 0%, transparent 45%),
+        radial-gradient(circle at 50% 50%, rgba(5, 46, 22, 0.2) 0%, transparent 60%);
     color: var(--text-white);
     min-height: 100vh;
     display: flex;
@@ -639,47 +643,65 @@ body {
     letter-spacing: 0.5px;
 }
 
-/* Waste Type Select (Horizontal Scroll Buttons) */
-.type-selector {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 10px;
+/* Waste Type Select List (Vertical stacked items with description) */
+.type-selector-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
 }
 
-.type-option input {
+.type-option-item input {
     display: none;
 }
 
-.option-card {
+.option-item-card {
     background: var(--bg-dark-800);
     border: 1px solid var(--border-glass);
-    border-radius: 14px;
-    padding: 12px 6px;
+    border-radius: 16px;
+    padding: 14px 16px;
     display: flex;
     flex-direction: column;
-    align-items: center;
-    gap: 8px;
+    gap: 6px;
     cursor: pointer;
     transition: all 0.2s ease;
 }
 
-.option-card i {
-    font-size: 1.2rem;
-    color: var(--text-gray-400);
+.option-item-card:hover {
+    background: var(--bg-dark-700);
+    border-color: rgba(255, 255, 255, 0.1);
 }
 
-.option-card span {
+.option-item-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.option-item-header i {
+    font-size: 1.1rem;
+}
+
+.option-item-title {
+    font-family: var(--font-heading);
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: var(--text-white);
+}
+
+.option-item-desc {
     font-size: 0.75rem;
-    font-weight: 500;
-    text-align: center;
+    color: var(--text-gray-400);
+    line-height: 1.4;
+    margin-left: 26px; /* indent to align under the title instead of the icon */
 }
 
-.type-option input:checked + .option-card {
-    background: rgba(16, 185, 129, 0.1);
+.type-option-item input:checked + .option-item-card {
+    background: rgba(16, 185, 129, 0.08);
     border-color: var(--primary);
+    box-shadow: 0 4px 12px var(--primary-glow);
 }
 
-.type-option input:checked + .option-card i {
+.type-option-item input:checked + .option-item-card .option-item-title {
     color: var(--primary);
 }
 
