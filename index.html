@@ -140,27 +140,34 @@
                 <div class="scroll-content">
                     <form id="form-setor" onsubmit="handleFormSetor(event)">
                         <div class="form-group">
-                            <label>Jenis Sampah Organik</label>
+                            <label>Kategori Sampah</label>
                             <div class="type-selector">
                                 <label class="type-option">
-                                    <input type="radio" name="waste-type" value="Sisa Makanan" checked>
+                                    <input type="radio" name="waste-type" value="Organik" checked>
                                     <div class="option-card">
-                                        <i class="fa-solid fa-plate-wheat"></i>
-                                        <span>Sisa Makanan</span>
+                                        <i class="fa-solid fa-leaf text-emerald"></i>
+                                        <span>Organik</span>
                                     </div>
                                 </label>
                                 <label class="type-option">
-                                    <input type="radio" name="waste-type" value="Kulit Buah/Sayur">
+                                    <input type="radio" name="waste-type" value="Anorganik">
                                     <div class="option-card">
-                                        <i class="fa-solid fa-carrot"></i>
-                                        <span>Buah & Sayur</span>
+                                        <i class="fa-solid fa-recycle text-cyan"></i>
+                                        <span>Anorganik</span>
                                     </div>
                                 </label>
                                 <label class="type-option">
-                                    <input type="radio" name="waste-type" value="Ampas Kopi/Teh">
+                                    <input type="radio" name="waste-type" value="B3">
                                     <div class="option-card">
-                                        <i class="fa-solid fa-mug-hot"></i>
-                                        <span>Ampas Kopi</span>
+                                        <i class="fa-solid fa-skull-crossbones text-red"></i>
+                                        <span>B3 (Bahaya)</span>
+                                    </div>
+                                </label>
+                                <label class="type-option">
+                                    <input type="radio" name="waste-type" value="Residu">
+                                    <div class="option-card">
+                                        <i class="fa-solid fa-trash-can text-gray"></i>
+                                        <span>Residu</span>
                                     </div>
                                 </label>
                             </div>
@@ -217,9 +224,13 @@
                     </div>
 
                     <div class="reward-categories">
-                        <span class="category-pill active">Semua</span>
-                        <span class="category-pill">Listrik</span>
-                        <span class="category-pill">Air (PDAM)</span>
+                        <span class="category-pill active" onclick="filterRewards('Semua')">Semua</span>
+                        <span class="category-pill" onclick="filterRewards('Listrik')">Listrik</span>
+                        <span class="category-pill" onclick="filterRewards('Air (PDAM)')">Air (PDAM)</span>
+                        <span class="category-pill" onclick="filterRewards('Pulsa')">Pulsa</span>
+                        <span class="category-pill" onclick="filterRewards('Pendidikan')">Pendidikan</span>
+                        <span class="category-pill" onclick="filterRewards('Belanja')">Belanja</span>
+                        <span class="category-pill" onclick="filterRewards('Uang Tunai')">Uang Tunai</span>
                     </div>
 
                     <div class="reward-grid" id="reward-items-container">

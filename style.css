@@ -642,7 +642,7 @@ body {
 /* Waste Type Select (Horizontal Scroll Buttons) */
 .type-selector {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(2, 1fr);
     gap: 10px;
 }
 
@@ -681,6 +681,18 @@ body {
 
 .type-option input:checked + .option-card i {
     color: var(--primary);
+}
+
+.reward-categories {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 20px;
+    overflow-x: auto;
+    white-space: nowrap;
+    padding-bottom: 4px;
+}
+.reward-categories::-webkit-scrollbar {
+    display: none;
 }
 
 /* Weight Input */
@@ -797,11 +809,6 @@ body {
     opacity: 0.8;
 }
 
-.reward-categories {
-    display: flex;
-    gap: 8px;
-    margin-bottom: 20px;
-}
 
 .category-pill {
     padding: 8px 16px;
@@ -1008,6 +1015,9 @@ body {
 /* Utility Helpers */
 .text-emerald { color: var(--primary); }
 .text-gold { color: var(--gold); }
+.text-cyan { color: var(--secondary); }
+.text-red { color: #ef4444; }
+.text-gray { color: var(--text-gray-400); }
 
 /* Responsive adjustments */
 @media (max-width: 768px) {

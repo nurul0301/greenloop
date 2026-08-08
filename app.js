@@ -78,6 +78,78 @@ const state = {
             icon: 'fa-droplet',
             colorClass: 'text-secondary',
             bgClass: 'bg-cyan'
+        },
+        {
+            id: 'RWD-PLS-10',
+            name: 'Pulsa Seluler Rp 10.000',
+            cost: 1000,
+            category: 'Pulsa',
+            icon: 'fa-mobile-screen-button',
+            colorClass: 'text-cyan',
+            bgClass: ''
+        },
+        {
+            id: 'RWD-PLS-25',
+            name: 'Pulsa Seluler Rp 25.000',
+            cost: 2500,
+            category: 'Pulsa',
+            icon: 'fa-mobile-screen-button',
+            colorClass: 'text-cyan',
+            bgClass: ''
+        },
+        {
+            id: 'RWD-SPP-50',
+            name: 'Subsidi SPP Sekolah Rp 50.000',
+            cost: 5000,
+            category: 'Pendidikan',
+            icon: 'fa-graduation-cap',
+            colorClass: 'text-emerald',
+            bgClass: ''
+        },
+        {
+            id: 'RWD-SPP-100',
+            name: 'Subsidi SPP Sekolah Rp 100.000',
+            cost: 10000,
+            category: 'Pendidikan',
+            icon: 'fa-graduation-cap',
+            colorClass: 'text-emerald',
+            bgClass: ''
+        },
+        {
+            id: 'RWD-BLJ-25',
+            name: 'Voucher Belanja Alfamart/Indomaret Rp 25.000',
+            cost: 2500,
+            category: 'Belanja',
+            icon: 'fa-cart-shopping',
+            colorClass: 'text-gold',
+            bgClass: ''
+        },
+        {
+            id: 'RWD-BLJ-50',
+            name: 'Voucher Belanja Alfamart/Indomaret Rp 50.000',
+            cost: 5000,
+            category: 'Belanja',
+            icon: 'fa-cart-shopping',
+            colorClass: 'text-gold',
+            bgClass: ''
+        },
+        {
+            id: 'RWD-TUN-50',
+            name: 'Pencairan Tunai Kantor Pos Rp 50.000',
+            cost: 5000,
+            category: 'Uang Tunai',
+            icon: 'fa-money-bill-wave',
+            colorClass: 'text-emerald',
+            bgClass: ''
+        },
+        {
+            id: 'RWD-TUN-100',
+            name: 'Pencairan Tunai Bank NTB Syariah Rp 100.000',
+            cost: 10000,
+            category: 'Uang Tunai',
+            icon: 'fa-money-bill-wave',
+            colorClass: 'text-emerald',
+            bgClass: ''
         }
     ]
 };
@@ -196,11 +268,33 @@ function updateUI() {
     document.getElementById('reactor-progress').style.width = `${capacityPct}%`;
 }
 
-function renderRewards() {
+let currentCategory = 'Semua';
+
+function filterRewards(category) {
+    currentCategory = category;
+    
+    // Update active pill UI
+    const pills = document.querySelectorAll('.category-pill');
+    pills.forEach(pill => {
+        if (pill.getAttribute('onclick').includes(`'${category}'`)) {
+            pill.classList.add('active');
+        } else {
+            pill.classList.remove('active');
+        }
+    });
+
+    renderRewards(category);
+}
+
+function renderRewards(category = 'Semua') {
     const container = document.getElementById('reward-items-container');
     container.innerHTML = '';
 
-    state.rewards.forEach(reward => {
+    const filtered = category === 'Semua' 
+        ? state.rewards 
+        : state.rewards.filter(r => r.category === category);
+
+    filtered.forEach(reward => {
         const cardHTML = `
             <div class="reward-card">
                 <div class="reward-card-info">
@@ -346,9 +440,23 @@ function redeemReward(rewardId) {
     if (reward.category === 'Listrik') {
         // PLN Token is 20 digits: XXXX-XXXX-XXXX-XXXX-XXXX
         voucherCode = generateRandomPLNToken();
-    } else {
+    } else if (reward.category === 'Air (PDAM)') {
         // PDAM discount code is alphanumeric 12 chars
         voucherCode = generateRandomPromoCode('PDAM');
+    } else if (reward.category === 'Pulsa') {
+        // Pulsa code
+        voucherCode = generateRandomPromoCode('PULSA');
+    } else if (reward.category === 'Pendidikan') {
+        // SPP voucher
+        voucherCode = generateRandomPromoCode('SPP');
+    } else if (reward.category === 'Belanja') {
+        // Shopping voucher
+        voucherCode = generateRandomPromoCode('BLJ');
+    } else if (reward.category === 'Uang Tunai') {
+        // Cash payout code
+        voucherCode = generateRandomPromoCode('CASH');
+    } else {
+        voucherCode = generateRandomPromoCode('VCHR');
     }
 
     // Show Success Modal
