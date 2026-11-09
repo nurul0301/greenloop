@@ -1,5 +1,5 @@
 /* ==========================================================================
-   BIOLOOP DESIGN SYSTEM & BRANDING
+   GREENLOOP DESIGN SYSTEM & BRANDING
    ========================================================================== */
 
 :root {
@@ -17,7 +17,7 @@
     --gradient-green: linear-gradient(135deg, #10b981 0%, #059669 100%);
     --gradient-dark: linear-gradient(180deg, #121815 0%, #0c100e 100%);
     --gradient-gold: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
-    --font-heading: 'Plus Jakarta Sans', sans-serif;
+    --font-heading: 'Plus Yogyakarta Sans', sans-serif;
     --font-body: 'Inter', sans-serif;
     --shadow-premium: 0 10px 30px -10px rgba(0, 0, 0, 0.7);
 }
