@@ -360,7 +360,7 @@ function handleFormSetor(event) {
     // 2. Add to Simulator Pickup queue
     state.pickupQueue.push({
         id: txId,
-        donorName: 'Kiran Lestari',
+        donorName: 'Nurul Isnaeni Rahmat',
         type: type,
         weight: weight,
         date: dateStr
